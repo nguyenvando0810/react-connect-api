@@ -1,0 +1,16 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "json-server",
+      "price": 1000,
+      "status": true
+    },
+    {
+      "name": "6666666666666666",
+      "price": "112",
+      "status": "true",
+      "id": 2
+    }
+  ]
+}
