@@ -1,64 +1,34 @@
 {
   "products": [
     {
-      "id": 1,
-      "name": "json-server",
-      "price": 1000,
-      "status": true
-    },
-    {
-      "name": "6666666666666666",
-      "price": "112",
-      "status": "true",
-      "id": 2
-    },
-    {
-      "name": "dodo",
-      "price": "12212",
-      "status": true,
-      "id": 3
-    },
-    {
-      "name": "cx",
+      "id": 4,
+      "name": "cx11111",
       "price": "12121",
-      "status": "",
-      "id": 4
+      "status": ""
     },
     {
-      "name": "cxcxc",
-      "price": "12",
-      "status": true,
+      "name": "do",
+      "price": "1212121",
+      "status": "",
       "id": 5
     },
     {
-      "name": "cxcxc",
-      "price": "12",
-      "status": true,
+      "name": "qwqwq",
+      "price": "1000",
+      "status": "",
       "id": 6
     },
     {
-      "name": "cxcxc",
-      "price": "12",
-      "status": true,
-      "id": 7
+      "id": 7,
+      "name": "dodo",
+      "price": "1234656",
+      "status": true
     },
     {
+      "id": 8,
       "name": "cxcxc",
-      "price": "12",
-      "status": true,
-      "id": 8
-    },
-    {
-      "name": "cxcxc",
-      "price": "11111",
-      "status": "",
-      "id": 9
-    },
-    {
-      "name": "dfs",
-      "price": "111111",
-      "status": "",
-      "id": 10
+      "price": "1212121",
+      "status": ""
     }
   ]
 }

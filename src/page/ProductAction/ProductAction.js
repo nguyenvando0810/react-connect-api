@@ -1,8 +1,8 @@
 import React from 'react';
 import './ProductAction.scss'
-import callApi from '../../utils/callApi'
 import { Link } from 'react-router-dom'
-
+import { connect } from 'react-redux'
+import { addProductRequest, editProductRequest, updateProductRequest } from '../../actions/index'
 class ProductAction extends React.Component {
   constructor(props) {
     super(props);
@@ -14,6 +14,28 @@ class ProductAction extends React.Component {
       status: ''
     }
     this.onHandleSubmit = this.onHandleSubmit.bind(this)
+  }
+
+  componentDidMount() {
+    let { match } = this.props
+
+    if(match) {
+      let id = match.params.id
+      this.props.onEditProduct(id)
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if(nextProps) {
+      let {itemEditing} = nextProps
+
+      this.setState({
+        id: itemEditing.id,
+        name: itemEditing.name,
+        price: itemEditing.price,
+        status: itemEditing.status
+      })
+    }
   }
 
   onHandleChange = (e) => {
@@ -29,18 +51,17 @@ class ProductAction extends React.Component {
   onHandleSubmit(e) {
     e.preventDefault()
 
-    let { name, price, status } = this.state
+    let { id, name, price, status } = this.state
     let { history } = this.props
+    let product = { id, name, price, status }
 
-    callApi('products', 'POST', {
-      name,
-      price,
-      status
-    }).then(res => {
-      if (res.status === 201) {
-        history.goBack()
-      }
-    })
+    if(id) {
+      this.props.onUpdateProduct(product)
+      history.goBack()
+    } else {
+      this.props.onAddProduct(product)
+      history.goBack()
+    }
   }
 
   render() {
@@ -64,7 +85,7 @@ class ProductAction extends React.Component {
                   <label>Status:</label>
                   <div className="form-check">
                     <label className="form-check-label">
-                      <input type="checkbox" className="form-check-input" name="status" value={status} onChange={this.onHandleChange} />
+                      <input type="checkbox" className="form-check-input" name="status" value={status} onChange={this.onHandleChange}  checked={status}/>
                       Sold In
                     </label>
                   </div>
@@ -82,4 +103,26 @@ class ProductAction extends React.Component {
   }
 }
 
-export default ProductAction
+const mapStateToProps = (state) => {
+  return {
+    itemEditing: state.itemEditing
+  }
+}
+
+const mapDispatchToProps = (dispatch, props) => {
+  return {
+    onAddProduct: (product) => {
+      dispatch(addProductRequest(product))
+    },
+
+    onEditProduct: (id) => {
+      dispatch(editProductRequest(id))
+    },
+
+    onUpdateProduct: (product) => {
+      dispatch(updateProductRequest(product))
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductAction)
