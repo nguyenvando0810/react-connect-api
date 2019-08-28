@@ -34,10 +34,8 @@ class ProductListPage extends React.Component {
   }
 
   showProductList = (products) => {
-    let result = null
-
     if (products.length > 0) {
-      result = products.map((product, index) => {
+      return products.map((product, index) => {
         return (
           <Product
             key={index}
@@ -48,9 +46,9 @@ class ProductListPage extends React.Component {
         )
       })
     }
-    return result
   }
 }
+
 const mapStateToProps = (state) => {
   return {
     products: state.products

@@ -46,15 +46,13 @@ const MenusLink = ({ label, to, active }) => {
 
 class Navbar extends React.Component {
   showMenu = (menus) => {
-    let result = null
-
     if (menus.length > 0) {
-      result = menus.map((menu, index) => {
+      return menus.map((menu, index) => {
         return <MenusLink key={index} label={menu.name} to={menu.to} active={menu.exact} />
       })
     }
-    return result
   }
+
   render() {
     return (
       <div>

@@ -66,6 +66,7 @@ class ProductAction extends React.Component {
 
   render() {
     let { name, price, status } = this.state
+
     return (
       <div className="container">
         <div className="product__form">

@@ -17,7 +17,6 @@ export const getProduct = (products) => {
   }
 }
 
-
 //Delete product
 export const deleteProductRequest = (id) => {
   return (dispatch) => {
