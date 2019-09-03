@@ -19,15 +19,15 @@ class ProductAction extends React.Component {
   componentDidMount() {
     let { match } = this.props
 
-    if(match) {
+    if (match) {
       let id = match.params.id
       this.props.onEditProduct(id)
     }
   }
 
   componentWillReceiveProps(nextProps) {
-    if(nextProps) {
-      let {itemEditing} = nextProps
+    if (nextProps) {
+      let { itemEditing } = nextProps
 
       this.setState({
         id: itemEditing.id,
@@ -55,12 +55,16 @@ class ProductAction extends React.Component {
     let { history } = this.props
     let product = { id, name, price, status }
 
-    if(id) {
-      this.props.onUpdateProduct(product)
-      history.goBack()
+    if (id) {
+      if (name || price) {
+        this.props.onUpdateProduct(product)
+        history.goBack()
+      }
     } else {
-      this.props.onAddProduct(product)
-      history.goBack()
+      if (name || price) {
+        this.props.onAddProduct(product)
+        history.goBack()
+      }
     }
   }
 
@@ -86,11 +90,12 @@ class ProductAction extends React.Component {
                   <label>Status:</label>
                   <div className="form-check">
                     <label className="form-check-label">
-                      <input type="checkbox" className="form-check-input" name="status" value={status} onChange={this.onHandleChange}  checked={status}/>
+                      <input type="checkbox" className="form-check-input" name="status" value={status} onChange={this.onHandleChange} checked={status} />
                       Sold In
                     </label>
                   </div>
                 </div>
+                {this.showMessageError()}
                 <div className="text-right">
                   <button type="submit" className="btn btn-primary mr-3"><i className="fa fa-pied-piper mr-1" aria-hidden="true"></i> Save</button>
                   <Link to="/products-list" className="btn btn-danger" ><i className="fa fa-modx mr-2" aria-hidden="true"></i>Cancel</Link>
@@ -101,6 +106,14 @@ class ProductAction extends React.Component {
         </div>
       </div>
     )
+  }
+
+  showMessageError() {
+    let { name, price } = this.state
+
+    if (!name || !price) {
+      return (<p style={{ color: 'red', fontSize: '20px' }}>Please enter name and price !</p>)
+    }
   }
 }
 

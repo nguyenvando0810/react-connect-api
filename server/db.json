@@ -1,6 +1,5 @@
 {
-  "products": [
-    {
+  "products": [{
       "id": 5,
       "name": "do",
       "price": "1212121",
@@ -13,22 +12,10 @@
       "id": 6
     },
     {
-      "id": 7,
-      "name": "dodo",
-      "price": "1234656",
-      "status": true
-    },
-    {
-      "id": 8,
-      "name": "cxcxc",
-      "price": "1212121",
-      "status": ""
-    },
-    {
-      "id": 9,
-      "name": "do",
-      "price": "11111",
-      "status": ""
+      "name": "qwqwq",
+      "price": "1000",
+      "status": "",
+      "id": 6
     }
   ]
 }

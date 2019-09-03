@@ -44,7 +44,7 @@ export const addProduct = (product) => {
 export const addProductRequest = (product) => {
   return (dispatch) => {
     return callApi('products', 'POST', product).then(res => {
-      dispatch(addProduct(product))
+      dispatch(addProduct(res.data))
     })
   }
 }

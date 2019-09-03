@@ -4,10 +4,17 @@ import Product from '../../components/Product/product'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { getProductRequest, deleteProductRequest } from '../../actions/index'
+import ModalComfirm from './../../components/ModalConfirm/modalConfirm'
 class ProductListPage extends React.Component {
   constructor(props) {
     super(props)
+
+    this.state = {
+      idDelete: ''
+    }
+
     this.onDeleteProduct = this.onDeleteProduct.bind(this)
+    this.getIdProductDelete = this.getIdProductDelete.bind(this)
   }
 
   componentDidMount() {
@@ -16,6 +23,12 @@ class ProductListPage extends React.Component {
 
   onDeleteProduct(id) {
     this.props.onDeleteProduct(id)
+  }
+
+  getIdProductDelete(id) {
+    this.setState({
+      idDelete: id
+    })
   }
 
   render() {
@@ -29,6 +42,8 @@ class ProductListPage extends React.Component {
         <ProductList>
           {this.showProductList(products)}
         </ProductList>
+
+        <ModalComfirm id={this.state.idDelete} onDeleteProduct={this.onDeleteProduct} />
       </div>
     )
   }
@@ -41,7 +56,7 @@ class ProductListPage extends React.Component {
             key={index}
             product={product}
             index={index}
-            onDeleteProduct={this.onDeleteProduct}
+            getIdProductDelete={this.getIdProductDelete}
           />
         )
       })
