@@ -7,13 +7,13 @@ class Product extends React.Component {
   }
 
   render() {
-    let { index, product } = this.props
+    let { product } = this.props
     let status = product.status ? 'Sold In' : 'Sold Out'
     let statusClass = product.status ? 'success' : 'warning'
 
     return (
       <tr>
-        <td className="text-center">{index}</td>
+        {/* <td className="text-center">{index}</td> */}
         <td className="text-center">{product.id}</td>
         <td className="text-center">{product.name}</td>
         <td className="text-center">{product.price} USD</td>

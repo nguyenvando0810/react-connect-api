@@ -13,3 +13,52 @@
     transform: rotate(360deg);
   }
 }
+
+.active-link {
+  border: 1px solid #007bff !important;
+  border-radius: 50%
+}
+
+.disabled {
+  color: #777;
+  background-color: #fff;
+  border-color: #ddd;
+  cursor: not-allowed;
+}
+
+.disabled:hover {
+  color: #777;
+}
+
+.page-link {
+  margin: 5px;
+  border: none;
+  padding: 8px 14px;
+}
+
+.page-link:hover {
+  background: transparent;
+}
+
+.products {
+  padding-bottom: 50px;
+}
+
+.prev::before {
+  margin-right: 5px;
+  content: "←";
+}
+
+.next::after {
+  margin-left: 5px;
+  content: "→";
+}
+
+.products__pagination {
+  display: flex;
+  justify-content: space-between;
+}
+
+.products__pagination span {
+  padding-top: 10px;
+}

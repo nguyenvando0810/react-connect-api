@@ -8,7 +8,7 @@ class ProductList extends React.Component {
         <table className="table table-bordered table-hover">
           <thead>
             <tr>
-              <th className="text-center">#</th>
+              {/* <th className="text-center">#</th> */}
               <th className="text-center">Id</th>
               <th className="text-center">Name</th>
               <th className="text-center">Price</th>
