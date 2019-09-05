@@ -4,6 +4,7 @@ const initialState = {
   id: '',
   name: '',
   price: '',
+  description: '',
   status: ''
 }
 

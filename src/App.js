@@ -11,7 +11,7 @@ class App extends React.Component {
         <div className="App">
           <Navbar />
 
-          <div className="container">
+          <div className="container mt-3">
             {this.showMenuContent(routes)}
           </div>
         </div>

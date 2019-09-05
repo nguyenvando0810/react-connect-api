@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { getProductRequest, deleteProductRequest } from '../../actions/index'
 import ModalComfirm from './../../components/ModalConfirm/modalConfirm'
+import './ProductListPage.scss'
 class ProductListPage extends React.Component {
   constructor(props) {
     super(props)
@@ -73,7 +74,7 @@ class ProductListPage extends React.Component {
     return (
       <div className="products">
         <h1 className="app-heading mt-3">Products Page</h1>
-        <Link to="/products/add" className="btn btn-primary mt-4 mb-4"><i className="fa fa-envira mr-1" aria-hidden="true"></i> Add Product</Link>
+        <Link to="/products/add" className="btn btn-primary mt-3 btn-sm my-0"><i className="fa fa-envira mr-1" aria-hidden="true"></i> Add Product</Link>
 
         <ProductList>
           {this.showProductList(products)}
@@ -85,7 +86,7 @@ class ProductListPage extends React.Component {
         {/* Btn loadmore */}
         <div className="products__pagination">
           <span>
-            <strong>Total</strong> : {this.showTotalInPage(products)} of {products.length} products
+            Showing <strong>{this.showTotalInPage(products)}</strong> of <strong>{products.length}</strong> products
           </span>
           <ul className="pagination justify-content-end">
             <li className={`page-link prev ${currentPage === 1 ? 'disabled' : ''}`} onClick={this.handleClickPageNumbersPrev}>Prev</li>

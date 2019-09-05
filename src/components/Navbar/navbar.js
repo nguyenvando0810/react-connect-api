@@ -1,7 +1,7 @@
 import React from 'react';
 import './navbar.scss'
 import { Route, Link } from 'react-router-dom'
-
+import logo from '../../logo.png'
 const menus = [
   {
     name: 'Home',
@@ -58,7 +58,9 @@ class Navbar extends React.Component {
       <div>
         <nav className="navbar navbar-expand-sm navbar-light bg-light">
           <div className="container">
-            <a href="/" className="navbar-brand">API</a>
+            <a href="/" className="navbar-brand">
+              <img src={logo} alt="logo" width="100" />
+            </a>
             <button className="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
               aria-expanded="false" aria-label="Toggle navigation">
               <span className="navbar-toggler-icon"></span>

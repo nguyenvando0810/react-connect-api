@@ -8,20 +8,21 @@ class ModalComfirm extends React.Component {
   render() {
     return (
       <div className="modal fade" id="confirmDelete" role="dialog" aria-hidden="true">
-        <div className="modal-dialog" role="document">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title" id="exampleModalLabel">Delete Confirm</h5>
+        <div className="modal-dialog modal-notify modal-info" role="document">
+          <div className="modal-content text-center">
+            <div className="modal-header d-flex justify-content-center">
+              <h3 className="modal-title heading">Delete Confirm</h3>
               <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div className="modal-body text-center">
-              Do you want delete it ?
+              <p><i className="fa fa-bug fa-4x" aria-hidden="true"></i></p>
+              <h4>Are you sure ?</h4>
             </div>
             <div className="modal-footer">
-              <button type="button" className="btn btn-secondary" data-dismiss="modal">Cancel</button>
-              <button type="button" className="btn btn-primary" data-dismiss="modal" onClick={this.onDeleteProduct.bind(this, this.props.id)}>I agree</button>
+              <button type="button" className="btn btn-info waves-effect btn-sm my-0" data-dismiss="modal">Cancel</button>
+              <button type="button" className="btn btn-danger waves-effect btn-sm" data-dismiss="modal" onClick={this.onDeleteProduct.bind(this, this.props.id)}>I agree</button>
             </div>
           </div>
         </div>
