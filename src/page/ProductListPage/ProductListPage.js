@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom'
 import { getProductRequest, deleteProductRequest } from '../../actions/index'
 import ModalComfirm from './../../components/ModalConfirm/modalConfirm'
 import './ProductListPage.scss'
+import iconNoData from './../../icon.gif'
 class ProductListPage extends React.Component {
   constructor(props) {
     super(props)
@@ -14,7 +15,8 @@ class ProductListPage extends React.Component {
       idDelete: '',
       // visibleItem: 5,
       currentPage: 1,
-      todosPerPage: 10
+      todosPerPage: 10,
+      keySearch: ''
     }
 
     this.onDeleteProduct = this.onDeleteProduct.bind(this)
@@ -22,6 +24,7 @@ class ProductListPage extends React.Component {
     this.handleClickPageNumbers = this.handleClickPageNumbers.bind(this)
     this.handleClickPageNumbersPrev = this.handleClickPageNumbersPrev.bind(this)
     this.handleClickPageNumbersNext = this.handleClickPageNumbersNext.bind(this)
+    this.onHandleChangeSearch = this.onHandleChangeSearch.bind(this)
     // this.loadMore = this.loadMore.bind(this)
   }
 
@@ -67,14 +70,29 @@ class ProductListPage extends React.Component {
     }
   }
 
+  onHandleChangeSearch(e) {
+    this.setState({
+      keySearch: e.target.value,
+      currentPage: 1
+    })
+  }
+
   render() {
     let { products } = this.props
-    let { currentPage, todosPerPage } = this.state
+    let { currentPage, todosPerPage, keySearch } = this.state
+
+    products = products.filter(product => product.name.toLowerCase().indexOf(keySearch.toLowerCase()) !== -1)
 
     return (
       <div className="products">
         <h1 className="app-heading mt-3">Products Page</h1>
-        <Link to="/products/add" className="btn btn-primary mt-3 btn-sm my-0"><i className="fa fa-envira mr-1" aria-hidden="true"></i> Add Product</Link>
+        <div className="products__heading">
+          <Link to="/products/add" className="btn btn-primary mt-3 btn-sm my-0 m-0"><i className="fa fa-envira mr-1" aria-hidden="true"></i> Add Product</Link>
+          <div className="form-inline md-form form-sm mt-0">
+            <input className="form-control form-control-sm ml-3" type="text" placeholder="Search" aria-label="Search" onChange={this.onHandleChangeSearch} />
+            <i className="fa fa-search" aria-hidden="true"></i>
+          </div>
+        </div>
 
         <ProductList>
           {this.showProductList(products)}
@@ -84,23 +102,30 @@ class ProductListPage extends React.Component {
           <button onClick={this.loadMore} type="button" className="btn btn-primary">Load more</button>
         } */}
         {/* Btn loadmore */}
-        <div className="products__pagination">
-          <span>
-            Showing <strong>{this.showTotalInPage(products)}</strong> of <strong>{products.length}</strong> products
+        {products.length > 0 ?
+          (<div className="products__pagination">
+            <span>
+              Showing <strong>{this.showTotalProductInPage(products)}</strong> of <strong>{products.length}</strong> products
           </span>
-          <ul className="pagination justify-content-end">
-            <li className={`page-link prev ${currentPage === 1 ? 'disabled' : ''}`} onClick={this.handleClickPageNumbersPrev}>Prev</li>
-            {this.showPageNumber(products)}
-            <li className={`page-link next ${currentPage === Math.ceil(products.length / todosPerPage) ? 'disabled' : ''}`} onClick={this.handleClickPageNumbersNext}>Next</li>
-          </ul>
-        </div>
+            <ul className="pagination justify-content-end">
+              <li className={`page-link prev ${currentPage === 1 ? 'disabled' : ''}`} onClick={this.handleClickPageNumbersPrev}>Prev</li>
+              {this.showPageNumber(products)}
+              <li className={`page-link next ${currentPage === Math.ceil(products.length / todosPerPage) ? 'disabled' : ''}`} onClick={this.handleClickPageNumbersNext}>Next</li>
+            </ul>
+          </div>) : (
+            <div className="text-center">
+              <h4>No data available</h4>
+              <img src={iconNoData} alt="No data available" width="150" />
+            </div>
+          )
+        }
 
         <ModalComfirm id={this.state.idDelete} onDeleteProduct={this.onDeleteProduct} />
       </div>
     )
   }
 
-  showTotalInPage(products) {
+  showTotalProductInPage(products) {
     let { currentPage, todosPerPage } = this.state
 
     let total = currentPage * todosPerPage

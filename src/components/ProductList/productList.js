@@ -4,7 +4,7 @@ import './productList.scss'
 class ProductList extends React.Component {
   render() {
     return (
-      <table className="table table-striped text-center table-hover table-bordered mt-4">
+      <table className="table table-responsive-sm table-striped text-center table-hover table-bordered mt-4">
         <thead>
           <tr>
             {/* <th className="text-center">#</th> */}

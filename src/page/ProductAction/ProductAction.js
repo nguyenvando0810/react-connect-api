@@ -3,6 +3,7 @@ import './ProductAction.scss'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { addProductRequest, editProductRequest, updateProductRequest } from '../../actions/index'
+// import { Prompt } from 'react-router-dom'
 class ProductAction extends React.Component {
   constructor(props) {
     super(props);
@@ -13,14 +14,18 @@ class ProductAction extends React.Component {
       description: '',
       price: '',
       status: '',
+
       error: {
         name: false,
         description: false,
         price: false
-      }
+      },
+
+      // isShowPrompt: false
     }
 
     this.onHandleSubmit = this.onHandleSubmit.bind(this)
+    this.onHandleBlurName = this.onHandleBlurName.bind(this)
   }
 
   componentDidMount() {
@@ -54,6 +59,16 @@ class ProductAction extends React.Component {
     this.setState({
       [name]: value
     })
+
+    // if (value) {
+    //   this.setState({
+    //     isShowPrompt: true
+    //   })
+    // } else {
+    //   this.setState({
+    //     isShowPrompt: false
+    //   })
+    // }
   }
 
   onHandleSubmit(e) {
@@ -63,23 +78,29 @@ class ProductAction extends React.Component {
     let { history } = this.props
     let product = { id, name, description, price, status }
 
-    console.log("TCL: ProductAction -> onHandleSubmit -> product", product)
-
     if (id) {
-      if (name || price) {
-        this.props.onUpdateProduct(product)
-        history.goBack()
-      }
+      this.props.onUpdateProduct(product)
+      history.goBack()
     } else {
-      if (name || price) {
-        this.props.onAddProduct(product)
-        history.goBack()
-      }
+      this.props.onAddProduct(product)
+      history.goBack()
+    }
+  }
+
+  onHandleBlurName(e, field) {
+    if (!e.target.value) {
+      this.setState({
+        error: { ...this.state.error, [field]: true }
+      })
+    } else {
+      this.setState({
+        error: { ...this.state.error, [field]: false }
+      })
     }
   }
 
   render() {
-    let { name, description, price, status } = this.state
+    let { name, description, price, status, error } = this.state
 
     return (
       <div className="container">
@@ -90,19 +111,27 @@ class ProductAction extends React.Component {
               <div className="product__form-content">
                 <form onSubmit={this.onHandleSubmit} >
                   <div className="md-form">
-                    <input type="text" className="form-control" id="name" name="name" value={name} placeholder="Name ..." onChange={this.onHandleChange} onBlur={this.onBlurName} required />
-                    {/* <label htmlFor="name">Name product</label> */}
-                    <div class="error_message">
-                      Please enter name
-                    </div>
+                    <input type="text" className="form-control" name="name" value={name} placeholder="Name" onChange={this.onHandleChange}
+                      onBlur={(e) => this.onHandleBlurName(e, 'name')} />
+                    {error.name &&
+                      <div className="error_message">Name cannot be empty</div>
+                    }
                   </div>
                   <div className="md-form">
-                    <textarea className="md-textarea form-control" name="description" placeholder="Description ..." value={description} onChange={this.onHandleChange} rows="3"></textarea>
-                    {/* <label htmlFor="name">Name product</label> */}
+                    <textarea className="md-textarea form-control" name="description" placeholder="Description" value={description} onChange={this.onHandleChange}
+                      onBlur={(e) => this.onHandleBlurName(e, 'description')} rows="3">
+                    </textarea>
+                    {error.description &&
+                      <div className="error_message">Description cannot be empty</div>
+                    }
                   </div>
                   <div className="md-form">
-                    <input type="number" className="form-control" id="price" name="price" placeholder="Price ..." value={price} onChange={this.onHandleChange} required />
-                    {/* <label htmlFor="price">Price</label> */}
+                    <input type="number" min="0" className="form-control" name="price" placeholder="Price" value={price}
+                      onChange={this.onHandleChange}
+                      onBlur={(e) => this.onHandleBlurName(e, 'price')} />
+                    {error.price &&
+                      <div className="error_message">Price cannot be empty</div>
+                    }
                   </div>
                   <div className="custom-control custom-checkbox">
                     <label className="form-check-label">
@@ -111,8 +140,13 @@ class ProductAction extends React.Component {
                     </label>
                   </div>
                   <div className="text-right">
-                    <button type="submit" className="btn btn-info waves-effect btn-sm my-0 mr-3"><i className="fa fa-pied-piper mr-1" aria-hidden="true"></i> Save</button>
+                    <button type="submit" className="btn btn-info waves-effect btn-sm my-0 mr-3" disabled={!name || !description || !price}><i className="fa fa-pied-piper mr-1" aria-hidden="true"></i> Save</button>
                     <Link to="/products-list" className="btn btn-danger waves-effect btn-sm my-0" ><i className="fa fa-modx mr-2" aria-hidden="true"></i>Cancel</Link>
+
+                    {/* <Prompt
+                      when={isShowPrompt}
+                      message={`Dữ liệu của bạn có thể sẽ không được lưu lại.`}
+                    /> */}
                   </div>
                 </form>
               </div>
