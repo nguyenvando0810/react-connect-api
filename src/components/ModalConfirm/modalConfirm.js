@@ -1,5 +1,5 @@
 import React from 'react';
-
+import './modalConfirm.scss'
 class ModalComfirm extends React.Component {
   onDeleteProduct(id) {
     this.props.onDeleteProduct(id)
@@ -13,7 +13,7 @@ class ModalComfirm extends React.Component {
             <div className="modal-header d-flex justify-content-center">
               <h3 className="modal-title heading">Delete Confirm</h3>
               <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
+                <span aria-hidden="true" className="close-modal">&times;</span>
               </button>
             </div>
             <div className="modal-body text-center">
@@ -21,8 +21,10 @@ class ModalComfirm extends React.Component {
               <h4>Are you sure ?</h4>
             </div>
             <div className="modal-footer">
-              <button type="button" className="btn btn-info waves-effect btn-sm my-0" data-dismiss="modal">Cancel</button>
-              <button type="button" className="btn btn-danger waves-effect btn-sm" data-dismiss="modal" onClick={this.onDeleteProduct.bind(this, this.props.id)}>I agree</button>
+              <button type="button" className="btn btn-info waves-effect btn-sm mr-2" data-dismiss="modal"
+                onClick={this.onDeleteProduct.bind(this, this.props.id)}>I agree
+              </button>
+              <button type="button" className="btn  btn-danger waves-effect btn-sm my-0" data-dismiss="modal">Cancel</button>
             </div>
           </div>
         </div>

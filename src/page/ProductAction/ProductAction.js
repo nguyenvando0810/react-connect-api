@@ -119,7 +119,7 @@ class ProductAction extends React.Component {
                   </div>
                   <div className="md-form">
                     <textarea className="md-textarea form-control" name="description" placeholder="Description" value={description} onChange={this.onHandleChange}
-                      onBlur={(e) => this.onHandleBlurName(e, 'description')} rows="3">
+                      onBlur={(e) => this.onHandleBlurName(e, 'description')} rows="2">
                     </textarea>
                     {error.description &&
                       <div className="error_message">Description cannot be empty</div>
