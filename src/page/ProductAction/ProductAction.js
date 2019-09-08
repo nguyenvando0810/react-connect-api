@@ -99,6 +99,15 @@ class ProductAction extends React.Component {
     }
   }
 
+  handleOnInput(e) {
+    e.target.value = e.target.value.replace(/[^0-9]+/g, '')
+
+    if (e.target.value.length > 10) {
+      e.target.value = e.target.value.slice(0, 10)
+      return false
+    }
+  }
+
   render() {
     let { name, description, price, status, error } = this.state
 
@@ -128,7 +137,8 @@ class ProductAction extends React.Component {
                   <div className="md-form">
                     <input type="number" min="0" className="form-control" name="price" placeholder="Price" value={price}
                       onChange={this.onHandleChange}
-                      onBlur={(e) => this.onHandleBlurName(e, 'price')} />
+                      onBlur={(e) => this.onHandleBlurName(e, 'price')}
+                      onInput={this.handleOnInput}/>
                     {error.price &&
                       <div className="error_message">Price cannot be empty</div>
                     }
